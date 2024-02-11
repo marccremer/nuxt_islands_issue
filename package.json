@@ -10,8 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.10.1",
+    "nuxt": "patch:nuxt@npm%3A3.10.0#~/.yarn/patches/nuxt-npm-3.10.0-f38f448dd9.patch",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
-  }
+  },
+  "packageManager": "yarn@4.1.0"
 }

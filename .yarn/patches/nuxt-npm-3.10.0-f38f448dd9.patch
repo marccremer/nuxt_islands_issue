@@ -1,0 +1,13 @@
+diff --git a/dist/app/components/nuxt-island.js b/dist/app/components/nuxt-island.js
+index d4e05d34c5c2100f4de8cb4bebcaa5d34430ee5a..061e2b2a22efcec152c54fc661083a4dcefd5a03 100644
+--- a/dist/app/components/nuxt-island.js
++++ b/dist/app/components/nuxt-island.js
+@@ -169,6 +169,8 @@ export default defineComponent({
+           }
+         }
+         if (import.meta.client) {
++          const customEvent = new CustomEvent('island:loaded', { detail: { name: props.name} });
++          document.dispatchEvent(customEvent)
+           nextTick(() => {
+             canTeleport = true;
+             teleportKey.value++;
