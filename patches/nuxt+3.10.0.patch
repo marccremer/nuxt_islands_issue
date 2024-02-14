@@ -1,0 +1,13 @@
+diff --git a/node_modules/nuxt/dist/app/components/nuxt-island.js b/node_modules/nuxt/dist/app/components/nuxt-island.js
+index d4e05d3..1ddbf42 100644
+--- a/node_modules/nuxt/dist/app/components/nuxt-island.js
++++ b/node_modules/nuxt/dist/app/components/nuxt-island.js
+@@ -164,6 +164,8 @@ export default defineComponent({
+         payloads.slots = res.slots || {};
+         payloads.components = res.components || {};
+         if (selectiveClient && import.meta.client) {
++          const customEvent = new CustomEvent('island:loaded', { detail: { name: props.name } });
++          document.dispatchEvent(customEvent)
+           if (canLoadClientComponent.value && res.components) {
+             await loadComponents(props.source, res.components);
+           }

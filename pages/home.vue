@@ -1,26 +1,26 @@
 <template>
   <main>
+    <NuxtLoadingIndicator></NuxtLoadingIndicator>
     <button @click="reload = !reload">click me</button>
-    <div v-if="loading">
-      ...loading
-    </div>
-    <ServerShow :reload="reload"></ServerShow>
+    <button @click="() => refresh++">refresh</button>
+    <ServerShow :refresh="refresh" :reload="reload"></ServerShow>
   </main>
 </template>
 
 <script setup lang="ts">
 const reload = ref(false);
-const loading = ref(false)
-watch(reload, (a, b) => {
-  loading.value = true
+const loading = ref(false);
+const refresh = ref(0);
+const { progress, isLoading, start, finish, clear } = useLoadingIndicator({
+  duration: 2000,
+  throttle: 200,
+});
+useIslandLoading(() => finish());
 
-})
-if (!process.server) {
-  document.addEventListener('island:loaded', (e) => {
-    console.log(e)
-    loading.value = false
-  })
-}
+watch([reload, refresh], (a, b) => {
+  start();
+  loading.value = true;
+});
 </script>
 
 <style scoped></style>
